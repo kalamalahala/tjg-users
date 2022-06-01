@@ -173,6 +173,10 @@ class Tjg_Users {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
+		// Add Page Template filter
+		$this->loader->add_filter( 'page_template', $plugin_public, 'tjg_users_create_page_template' );
+		
+
 	}
 
 	/**
@@ -213,6 +217,51 @@ class Tjg_Users {
 	 */
 	public function get_version() {
 		return $this->version;
+	}
+
+	/**
+	 * 	Get a list of matching Agents in The Johnson Group.
+	 * 
+	 * 	Return the 0th index user.
+	 * 
+	 * 	@param mixed $agent_number
+	 * 	@return int $users
+	 */
+	public function get_user_by_agent_number($agent_number) {
+		// Get list of users matching that agent number, return the 0th index user.
+		$user_query = new WP_User_Query( array(
+			'meta_key' => 'agent_number',
+			'meta_value' => $agent_number,
+			'number' => 1
+		) );
+		$users = $user_query->get_results();
+		return $users[0];
+	}
+
+	public function get_tjg_agents( int $hierarchy_agent = null ) {
+		$tjg_agents = [];
+		// If a hierachy agent is provided, begin the search tree with that agent.
+		if ( $hierarchy_agent ) {
+			$tjg_agents[] = $hierarchy_agent;
+		} else {
+			// If no hierarchy agent is provided, begin the search tree with the Agency Owner
+			$meta_query = [
+				[
+					'key'     => 'agent_position',
+					'value'   => 'Agency Owner',
+					'compare' => '=',
+				],
+			];
+			$meta_agent = get_users( [
+				'meta_query' => $meta_query,
+			] );
+			$tjg_agents[] = $meta_agent[0]->ID;
+		}
+
+		
+		
+		
+		return $tjg_agents;
 	}
 
 }

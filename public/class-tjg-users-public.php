@@ -100,4 +100,15 @@ class Tjg_Users_Public {
 
 	}
 
+	public function tjg_users_create_page_template() {
+
+
+		global $post;
+		echo $post->post_name;
+		if ($post->post_name == 'manage-users') {
+			$page_template = TJG_USERS_ROOT . 'includes/page-templates/manage-users.php';
+			return $page_template;
+		}
+		}
+
 }

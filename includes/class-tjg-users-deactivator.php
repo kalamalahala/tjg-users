@@ -31,6 +31,21 @@ class Tjg_Users_Deactivator {
 	 */
 	public static function deactivate() {
 
+		// Delete the "Manage Users" page when deactivating the plugin
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'posts';
+		$post_check = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT * FROM $table_name WHERE post_name = %s",
+				'manage-users'
+			)
+			);
+		if ( !empty($post_check) ) {
+			wp_delete_post($post_check->ID, true);
+		} else {
+			// If the post does not exist, do nothing
+		}
+
 	}
 
 }
