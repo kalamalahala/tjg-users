@@ -30,9 +30,10 @@ get_header();
 		if (!empty($agent->team) && is_array($agent->team)) {
 			foreach ($agent->team as $child) {
 				$ticker++;
-				print "<p>#$ticker) {$agent->agent_name}'s Team</p>";
-				print "<p>Agent Name: {$child->agent_name}</p>";
-				print "<p>Agent Number: {$child->agent_number}</p>";
+				print_r ($child);
+				// print "<p>#$ticker) {$agent->agent_name}'s Team</p>";
+				// print "<p>Agent Name: {$child->agent_name}</p>";
+				// print "<p>Agent Number: {$child->agent_number}</p>";
 			}
 		} else {
 			continue;
