@@ -313,17 +313,7 @@ class Tjg_Users
 		$return_array['agent'][] = $hierarchy_agent;
 		$return_array['agent'] = array_merge($return_array['agent'], $hierarchy);
 		
-		print '<pre>';
-
-		// dump object
-
-		print '</pre>';
-
-
-
-
-		// $tjg_agents = array_merge($tjg_agents, $children);
-		return $agent;
+		return $return_array;
 	}
 }
 
