@@ -309,7 +309,9 @@ class Tjg_Users
 		$tjg_agents['agent'] = $agent;
 		$hierarchy = $agent->team();
 		if (!empty($hierarchy)) {
-			$tjg_agents['agent']['team'] = $hierarchy;
+			echo '<pre>';
+			print_r($hierarchy);
+			echo '</pre>';
 		}
 		
 		// If hierarchy isn't empty, create a new Agent object for each agent in the hierarchy using that agent's agent_number
