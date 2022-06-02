@@ -12,34 +12,23 @@ get_header();
 	<h1>TJG Users</h1>
 	<p>Manage and update TJG Agents</p>
 </header>
-<div class="table-container">
-	<table class="user-table">
-		<thead class="user-table-header">
-			<tr>
-				<th>Name</th>
-				<th>Email</th>
-				<th>Phone</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class="user-table-row">
-				<?php
-				$output = new Tjg_Users;
-				echo $output->get_tjg_agents();
-				?>
-				<td>John Doe</td>
-				<td>email@email.com</td>
-				<td>123-456-7890</td>
-				<td>
-					<a href="#" class="button">View</a>
-					<a href="#" class="button">Edit</a>
-					<a href="#" class="button">Delete Agent</a>
-					<a href="#" class="confirm-delete button" hidden>Are you sure?</a>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+<div class="users-container">
+	<?php
+
+	$agent_list = Tjg_Users::get_tjg_agents();
+
+	foreach ($agent_list as $agent) {
+		echo '<div class="user-container">';
+		echo '<h2>' . $agent->display_name . '</h2>';
+		echo '<p>' . $agent->user_email . '</p>';
+		echo '<p>' . $agent->user_login . '</p>';
+		echo '<p>' . $agent->user_registered . '</p>';
+		echo '<p>' . $agent->user_status . '</p>';
+		echo '<p>' . $agent->agent_number . '</p>';
+		echo '</div>';
+	}
+	?>
+
 </div>
 
 

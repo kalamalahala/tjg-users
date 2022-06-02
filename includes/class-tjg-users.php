@@ -238,7 +238,7 @@ class Tjg_Users {
 		return $users[0];
 	}
 
-	public function get_tjg_agents( int $hierarchy_agent = null ) {
+	public static function get_tjg_agents( int $hierarchy_agent = null ) {
 		$tjg_agents = [];
 		// If a hierachy agent is provided, begin the search tree with that agent.
 		if ( $hierarchy_agent ) {
