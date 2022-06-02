@@ -310,7 +310,7 @@ class Tjg_Users
 		$agent = new TJG_Agent($hierarchy_agent);
 		$hierarchy = $agent->team();
 		
-		$return_array['agent'][] = $hierarchy_agent;
+		$return_array['agent'][] = $agent;
 		$return_array['agent'] = array_merge($return_array['agent'], $hierarchy);
 		
 		return $return_array;

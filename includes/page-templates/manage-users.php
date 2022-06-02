@@ -13,13 +13,14 @@ get_header();
 	<p>Manage and update TJG Agents</p>
 </header>
 <div class="users-container">
+	<pre>
 	<?php
 
 	$agent_list = Tjg_Users::get_tjg_agents();
 
 	var_dump($agent_list);
 	?>
-
+	</pre>
 </div>
 
 
