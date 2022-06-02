@@ -284,11 +284,6 @@ class Tjg_Users
 	 */
 	public static function get_tjg_agents(int $hierarchy_agent = null)
 	{
-
-
-		$tjg_agents = array(
-			'Hierarchy Agent' => ''
-		);
 		// If a hierachy agent is provided, begin the search tree with that agent.
 		if ($hierarchy_agent) {
 
@@ -316,6 +311,8 @@ class Tjg_Users
 		
 		// dump object
 		var_dump($agent);
+
+		$hierarchy = $agent->team();
 
 
 
@@ -353,5 +350,25 @@ class TJG_Agent
 		$this->agent_email = $user->user_email;
 		$this->agent_phone = get_user_meta($user->ID, 'agent_phone', true);
 		$this->agent_supervisor = get_user_meta($user->ID, 'saNumber', true) ?? '';
+	}
+
+	public function team() {
+		$supervised_agents = array();
+		$children_meta_query = array(
+			'key' => 'saNumber',
+			'value' => $this->agent_number,
+			'compare' => '='
+		);
+		$children_query = new WP_User_Query(array(
+			'meta_query' => array(
+				$children_meta_query
+			)
+		));
+		$children = $children_query->get_results();
+		foreach ($children as $child) {
+			$agent_number = get_user_meta($child->ID, 'agent_number', true);
+			$supervised_agents[] = $agent_number;
+		}
+		return $supervised_agents;
 	}
 }
