@@ -26,7 +26,7 @@ get_header();
 			<tr class="user-table-row">
 				<?php
 				$output = new Tjg_Users;
-				echo $output->get_tjg_agents;
+				echo $output->get_tjg_agents();
 				?>
 				<td>John Doe</td>
 				<td>email@email.com</td>
