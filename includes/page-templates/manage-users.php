@@ -22,6 +22,7 @@ get_header();
 
 	// recursively count the $agent_list array
 	$agent_count = count( $agent_list, COUNT_RECURSIVE );
+	print "Agent count: $agent_count\n";
 
 	?>
 	</pre>
