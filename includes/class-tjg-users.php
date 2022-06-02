@@ -249,7 +249,7 @@ class Tjg_Users {
 	 * @param int $sa_number
 	 * @return array $agent_numbers
 	 */
-	public static function get_tjg_agent_children($sa_number) {
+	public static function get_supervised_agents($sa_number) {
 		$agent_numbers = array();
 		$children_meta_query = array(
 			'key' => 'saNumber',
@@ -298,7 +298,7 @@ class Tjg_Users {
 			$tjg_agents[] = $hierarchy_agent;
 		}
 		// Get the agent's children
-		$children = self::get_tjg_agent_children( $hierarchy_agent );
+		$children = self::get_supervised_agents( $hierarchy_agent );
 
 		if ( ! empty( $children ) ) {
 			foreach ( $children as $child ) {
