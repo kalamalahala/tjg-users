@@ -16,7 +16,8 @@ get_header();
 	<pre>
 	<?php
 
-	$agent_list = Tjg_Users::get_tjg_agents();
+	$agent_number_search = $_GET['agent_id'] ?? null;
+	$agent_list = Tjg_Users::get_tjg_agents( $agent_number_search );
 
 	print_r($agent_list);
 

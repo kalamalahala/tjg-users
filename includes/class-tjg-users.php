@@ -309,9 +309,7 @@ class Tjg_Users
 		$tjg_agents['agent'] = $agent;
 		$hierarchy = $agent->team();
 		if (!empty($hierarchy)) {
-			echo '<pre>';
-			print_r($hierarchy);
-			echo '</pre>';
+			$tjg_agents['agent']['team'] = $hierarchy;
 		}
 		
 		// If hierarchy isn't empty, create a new Agent object for each agent in the hierarchy using that agent's agent_number
@@ -351,7 +349,7 @@ class TJG_Agent
 		$this->agent_name = $user->display_name;
 		$this->agent_position = get_user_meta($user->ID, 'agent_position', true);
 		$this->agent_email = $user->user_email;
-		$this->agent_phone = get_user_meta($user->ID, 'agent_phone', true);
+		$this->agent_phone = get_user_meta($user->ID, 'phone_number', true);
 		$this->agent_supervisor = get_user_meta($user->ID, 'saNumber', true) ?? '';
 	}
 
