@@ -224,7 +224,7 @@ class Tjg_Users
 	}
 
 	/**
-	 * 	Get a list of matching Agents in The Johnson Group.
+	 * 	Return a wordpress user matching a given Agent Number.
 	 * 
 	 * 	Return the 0th index user.
 	 * 
@@ -243,6 +243,12 @@ class Tjg_Users
 		return $users[0];
 	}
 
+	/**
+	 * Return the LibNat Agent Number for a given user ID
+	 * 
+	 * @param int $user_id
+	 * @return int $agent_number
+	 */
 	public static function get_agent_number_by_user_id($id)
 	{
 		$user = get_user_by('id', $id);
@@ -317,6 +323,26 @@ class Tjg_Users
 		
 		return $tjg_agents;
 	}
+
+	/**
+	 * Retrieve a TJG_Agent object for a given agent_number.
+	 * 
+	 * @param mixed $agent_number
+	 * @return object $agent
+	 */
+	 
+	public static function get_agent_by_agent_number( int|string $agent_number = null )
+	{
+		if (is_null($agent_number)) { return false ; }
+		$agent = new TJG_Agent($agent_number);
+		return $agent;
+	}
+
+	public static function get_team( object $agent_object = null ) {
+		if (is_null($agent_object)) { return false ; }
+		$team = $agent_object->team();
+		return $team;
+	}
 }
 
 
@@ -331,8 +357,12 @@ class TJG_Agent
 	public $agent_phone;
 	public $agent_supervisor;
 
-	public function __construct($agent_number)
+	public function __construct(int|string $agent_number = null)
 	{
+		// a Liberty National agent number MUST be passed to this constructor, or it will exit.
+		if (is_null($agent_number)) {
+			return;
+		}
 		$this->agent_number = $agent_number;
 		// Get user ID from agent_number
 		$user_query = new WP_User_Query(array(
@@ -347,6 +377,7 @@ class TJG_Agent
 		$this->agent_email = $user->user_email;
 		$this->agent_phone = get_user_meta($user->ID, 'phone_number', true);
 		$this->agent_supervisor = get_user_meta($user->ID, 'saNumber', true) ?? '';
+		$this->team = $this->team();
 	}
 
 	public function team() {
