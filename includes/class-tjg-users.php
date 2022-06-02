@@ -300,11 +300,12 @@ class Tjg_Users {
 		// Get the agent's children
 		$children = self::get_tjg_agent_children( $hierarchy_agent );
 		// If there are children, recursively call this function to get their children
-		if ( $children ) {
-			foreach ( $children as $child ) {
-				$tjg_agents = array_merge( $tjg_agents, self::get_tjg_agents( $child ) );
-			}
-		}
+		// if ( $children ) {
+		// 	foreach ( $children as $child ) {
+		// 		$tjg_agents = array_merge( $tjg_agents, self::get_tjg_agents( $child ) );
+		// 	}
+		// }
+		$tjg_agents = array_merge( $tjg_agents, $children );
 		return $tjg_agents;
 	}
 
