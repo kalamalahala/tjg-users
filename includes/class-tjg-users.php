@@ -238,7 +238,7 @@ class Tjg_Users {
 		return $users[0];
 	}
 
-	public function get_agent_number_by_user_id($id) {
+	public static function get_agent_number_by_user_id($id) {
 		$user = get_user_by('id', $id);
 		return get_user_meta($user->ID, 'agent_number', true);
 	}
