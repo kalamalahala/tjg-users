@@ -27,6 +27,7 @@ get_header();
 		$ticker++;
 		print "<p>#$ticker) Agent Name: {$agent->agent_name}</p>";
 		print "<p>Agent Number: {$agent->agent_number}</p>";
+		print "<p>Team: {$agent->team}</p>";
 		print '<hr>';
 	}
 
