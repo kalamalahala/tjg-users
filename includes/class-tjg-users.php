@@ -309,10 +309,17 @@ class Tjg_Users
 
 		$agent = new TJG_Agent($hierarchy_agent);
 		
+		print '<pre>';
+
 		// dump object
 		var_dump($agent);
 
 		$hierarchy = $agent->team();
+
+		// dump object
+		var_dump($hierarchy);
+
+		print '</pre>';
 
 
 
