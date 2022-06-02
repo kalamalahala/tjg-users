@@ -74,7 +74,7 @@ class Tjg_Users_Public {
 		 */
 
 		// Bootstrap v4.6.1
-		wp_enqueue_style( 'Bootstrap v4.6.1', plugin_dir_url( __FILE__ ) . 'css/bootstrap.min.css', array(), '4.6.1', 'all' );
+		wp_enqueue_style( 'bootstrap', plugin_dir_url( __FILE__ ) . 'css/bootstrap.min.css', array(), '4.6.1', 'all' );
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/tjg-users-public.css', array(), $this->version, 'all' );
 
@@ -101,7 +101,7 @@ class Tjg_Users_Public {
 		 */
 
 		// Bootstrap v4.6.1 Bundle js
-		wp_enqueue_script( 'Bootstrap v4.6.1 Bundle', plugin_dir_url( __FILE__ ) . 'js/bootstrap.bundle.min.js', array( 'jquery' ), '4.6.1', true );
+		wp_enqueue_script( 'bootstrap', plugin_dir_url( __FILE__ ) . 'js/bootstrap.bundle.min.js', array( 'jquery' ), '4.6.1', true );
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/tjg-users-public.js', array( 'jquery' ), $this->version, false );
 
