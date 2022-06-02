@@ -311,8 +311,8 @@ class Tjg_Users
 		
 		// If hierarchy isn't empty, create a new Agent object for each agent in the hierarchy using that agent's agent_number
 		if (!empty($hierarchy)) {
-			foreach ($hierarchy as $agent_number) {
-				$tjg_agents['children'] = self::get_tjg_agents($agent_number);
+			foreach ($hierarchy as $agent) {
+				$tjg_agents['children'] = self::get_tjg_agents($agent->agent_number);
 			}
 		}
 		
