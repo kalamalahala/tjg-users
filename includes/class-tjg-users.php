@@ -250,6 +250,7 @@ class Tjg_Users {
 	 * @return array $agent_numbers
 	 */
 	public static function get_tjg_agent_children($sa_number) {
+		$agent_numbers = array();
 		$children_meta_query = array(
 			'key' => 'saNumber',
 			'value' => $sa_number,
