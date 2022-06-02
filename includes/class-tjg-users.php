@@ -303,11 +303,16 @@ class Tjg_Users
 			]);
 			// Retrieve agent_number for that user
 			$hierarchy_agent = self::get_agent_number_by_user_id($meta_agent[0]->ID);
-			$tjg_agents['agent'] = $hierarchy_agent;
 		}
-
+		
 		$agent = new TJG_Agent($hierarchy_agent);
+		$tjg_agents['agent'] = $agent;
 		$hierarchy = $agent->team();
+		if (!empty($hierarchy)) {
+			foreach ($hierarchy as $agent) {
+				$tjg_agents['agent'][] = $agent;
+			}
+		}
 		
 		// If hierarchy isn't empty, create a new Agent object for each agent in the hierarchy using that agent's agent_number
 		if (!empty($hierarchy)) {
