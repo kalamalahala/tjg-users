@@ -27,7 +27,8 @@
  * @subpackage Tjg_Users/includes
  * @author     Tyler Karle <tyler@thejohnson.group>
  */
-class Tjg_Users {
+class Tjg_Users
+{
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -66,8 +67,9 @@ class Tjg_Users {
 	 *
 	 * @since    1.0.0
 	 */
-	public function __construct() {
-		if ( defined( 'TJG_USERS_VERSION' ) ) {
+	public function __construct()
+	{
+		if (defined('TJG_USERS_VERSION')) {
 			$this->version = TJG_USERS_VERSION;
 		} else {
 			$this->version = '1.0.0';
@@ -78,7 +80,6 @@ class Tjg_Users {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
 	}
 
 	/**
@@ -97,33 +98,33 @@ class Tjg_Users {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function load_dependencies() {
+	private function load_dependencies()
+	{
 
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-tjg-users-loader.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-tjg-users-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-tjg-users-i18n.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-tjg-users-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-tjg-users-admin.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-tjg-users-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-tjg-users-public.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-tjg-users-public.php';
 
 		$this->loader = new Tjg_Users_Loader();
-
 	}
 
 	/**
@@ -135,12 +136,12 @@ class Tjg_Users {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function set_locale() {
+	private function set_locale()
+	{
 
 		$plugin_i18n = new Tjg_Users_i18n();
 
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
+		$this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
 	}
 
 	/**
@@ -150,13 +151,13 @@ class Tjg_Users {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function define_admin_hooks() {
+	private function define_admin_hooks()
+	{
 
-		$plugin_admin = new Tjg_Users_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Tjg_Users_Admin($this->get_plugin_name(), $this->get_version());
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-
+		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
+		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
 	}
 
 	/**
@@ -166,17 +167,16 @@ class Tjg_Users {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function define_public_hooks() {
+	private function define_public_hooks()
+	{
 
-		$plugin_public = new Tjg_Users_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Tjg_Users_Public($this->get_plugin_name(), $this->get_version());
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
+		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
 
 		// Add Page Template filter
-		$this->loader->add_filter( 'page_template', $plugin_public, 'tjg_users_create_page_template' );
-		
-
+		$this->loader->add_filter('page_template', $plugin_public, 'tjg_users_create_page_template');
 	}
 
 	/**
@@ -184,7 +184,8 @@ class Tjg_Users {
 	 *
 	 * @since    1.0.0
 	 */
-	public function run() {
+	public function run()
+	{
 		$this->loader->run();
 	}
 
@@ -195,7 +196,8 @@ class Tjg_Users {
 	 * @since     1.0.0
 	 * @return    string    The name of the plugin.
 	 */
-	public function get_plugin_name() {
+	public function get_plugin_name()
+	{
 		return $this->plugin_name;
 	}
 
@@ -205,7 +207,8 @@ class Tjg_Users {
 	 * @since     1.0.0
 	 * @return    Tjg_Users_Loader    Orchestrates the hooks of the plugin.
 	 */
-	public function get_loader() {
+	public function get_loader()
+	{
 		return $this->loader;
 	}
 
@@ -215,7 +218,8 @@ class Tjg_Users {
 	 * @since     1.0.0
 	 * @return    string    The version number of the plugin.
 	 */
-	public function get_version() {
+	public function get_version()
+	{
 		return $this->version;
 	}
 
@@ -227,18 +231,20 @@ class Tjg_Users {
 	 * 	@param mixed $agent_number
 	 * 	@return int $users
 	 */
-	public function get_user_by_agent_number($agent_number) {
+	public function get_user_by_agent_number($agent_number)
+	{
 		// Get list of users matching that agent number, return the 0th index user.
-		$user_query = new WP_User_Query( array(
+		$user_query = new WP_User_Query(array(
 			'meta_key' => 'agent_number',
 			'meta_value' => $agent_number,
 			'number' => 1
-		) );
+		));
 		$users = $user_query->get_results();
 		return $users[0];
 	}
 
-	public static function get_agent_number_by_user_id($id) {
+	public static function get_agent_number_by_user_id($id)
+	{
 		$user = get_user_by('id', $id);
 		return get_user_meta($user->ID, 'agent_number', true);
 	}
@@ -249,18 +255,19 @@ class Tjg_Users {
 	 * @param int $sa_number
 	 * @return array $agent_numbers
 	 */
-	public static function get_supervised_agents($sa_number) {
+	public static function get_supervised_agents($sa_number)
+	{
 		$agent_numbers = array();
 		$children_meta_query = array(
 			'key' => 'saNumber',
 			'value' => $sa_number,
 			'compare' => '='
 		);
-		$children_query = new WP_User_Query( array(
+		$children_query = new WP_User_Query(array(
 			'meta_query' => array(
 				$children_meta_query
 			)
-		) );
+		));
 		$children = $children_query->get_results();
 		foreach ($children as $child) {
 			$agent_number = get_user_meta($child->ID, 'agent_number', true);
@@ -275,10 +282,16 @@ class Tjg_Users {
 	 * @param int|null $hierarchy_agent 
 	 * @return array tjg_agent_hierarchy
 	 */
-	public static function get_tjg_agents( int $hierarchy_agent = null ) {
-		$tjg_agents = [];
+	public static function get_tjg_agents(int $hierarchy_agent = null)
+	{
+
+
+		$tjg_agents = array(
+			'Hierarchy Agent' => ''
+		);
 		// If a hierachy agent is provided, begin the search tree with that agent.
-		if ( $hierarchy_agent ) {
+		if ($hierarchy_agent) {
+
 			$tjg_agents['agent'] = $hierarchy_agent;
 		} else {
 			// If no hierarchy agent is provided, begin the search tree with the Agency Owner
@@ -289,22 +302,56 @@ class Tjg_Users {
 					'compare' => '=',
 				],
 			];
-			$meta_agent = get_users( [
+
+			$meta_agent = get_users([
 				'meta_query' => $meta_query,
-			] );
+			]);
 			// Retrieve agent_number for that user
-			$hierarchy_agent = self::get_agent_number_by_user_id( $meta_agent[0]->ID );
-			
-			$tjg_agents['agent'] = $hierarchy_agent;
+			$hierarchy_agent = self::get_agent_number_by_user_id($meta_agent[0]->ID);
+
+			// $tjg_agents['agent'] = $hierarchy_agent;
 		}
-		// Get the agent's children
-		$children = self::get_supervised_agents( $hierarchy_agent );
 
+		$agent = new TJG_Agent($hierarchy_agent);
 		
+		// dump object
+		var_dump($agent);
 
 
-		$tjg_agents = array_merge( $tjg_agents, $children );
-		return $tjg_agents;
+
+
+		// $tjg_agents = array_merge($tjg_agents, $children);
+		return $agent;
 	}
+}
 
+
+// Lets try OOP, create Agent Object
+
+class TJG_Agent
+{
+	public $agent_number;
+	public $agent_name;
+	public $agent_position;
+	public $agent_email;
+	public $agent_phone;
+	public $agent_supervisor;
+
+	public function __construct($agent_number)
+	{
+		$this->agent_number = $agent_number;
+		// Get user ID from agent_number
+		$user_query = new WP_User_Query(array(
+			'meta_key' => 'agent_number',
+			'meta_value' => $agent_number,
+			'number' => 1
+		));
+		$users = $user_query->get_results();
+		$user = $users[0];
+		$this->agent_name = $user->display_name;
+		$this->agent_position = get_user_meta($user->ID, 'agent_position', true);
+		$this->agent_email = $user->user_email;
+		$this->agent_phone = get_user_meta($user->ID, 'agent_phone', true);
+		$this->agent_supervisor = get_user_meta($user->ID, 'saNumber', true) ?? '';
+	}
 }
