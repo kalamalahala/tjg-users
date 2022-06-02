@@ -18,7 +18,7 @@ get_header();
 
 	$agent_list = Tjg_Users::get_tjg_agents();
 
-	var_dump($agent_list);
+	echo $agent_list;
 	?>
 	</pre>
 </div>

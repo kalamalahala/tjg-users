@@ -280,7 +280,7 @@ class Tjg_Users
 	 * Recursively get the agent hierarchy for a given agent, or the Agency Owner by default.
 	 *
 	 * @param int|null $hierarchy_agent 
-	 * @return array tjg_agent_hierarchy
+	 * @return object tjg_agents
 	 */
 	public static function get_tjg_agents(int $hierarchy_agent = null)
 	{
