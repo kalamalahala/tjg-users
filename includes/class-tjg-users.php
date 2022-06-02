@@ -238,6 +238,42 @@ class Tjg_Users {
 		return $users[0];
 	}
 
+	public function get_agent_number_by_user_id($id) {
+		$user = get_user_by('id', $id);
+		return get_user_meta($user->ID, 'agent_number', true);
+	}
+
+	/**
+	 * Get the agent_number meta value of each user that has a meta tag 'saNumber' matching $sa_number
+	 *
+	 * @param int $sa_number
+	 * @return array $agent_numbers
+	 */
+	public function get_tjg_agent_children($sa_number) {
+		$children_meta_query = array(
+			'key' => 'saNumber',
+			'value' => $sa_number,
+			'compare' => '='
+		);
+		$children_query = new WP_User_Query( array(
+			'meta_query' => array(
+				$children_meta_query
+			)
+		) );
+		$children = $children_query->get_results();
+		foreach ($children as $child) {
+			$agent_number = get_user_meta($child->ID, 'agent_number', true);
+			$agent_numbers[] = $agent_number;
+		}
+		return $agent_numbers;
+	}
+
+	/**
+	 * Recursively get the agent hierarchy for a given agent, or the Agency Owner by default.
+	 *
+	 * @param int|null $hierarchy_agent 
+	 * @return array tjg_agent_hierarchy
+	 */
 	public static function get_tjg_agents( int $hierarchy_agent = null ) {
 		$tjg_agents = [];
 		// If a hierachy agent is provided, begin the search tree with that agent.
@@ -255,12 +291,19 @@ class Tjg_Users {
 			$meta_agent = get_users( [
 				'meta_query' => $meta_query,
 			] );
+			// Retrieve agent_number for that user
+			$hierarchy_agent = self::get_agent_number_by_user_id( $meta_agent[0]->ID );
+			
 			$tjg_agents[] = $meta_agent[0]->ID;
 		}
-
-		
-		
-		
+		// Get the agent's children
+		$children = self::get_tjg_agent_children( $hierarchy_agent );
+		// If there are children, recursively call this function to get their children
+		if ( $children ) {
+			foreach ( $children as $child ) {
+				$tjg_agents = array_merge( $tjg_agents, self::get_tjg_agents( $child ) );
+			}
+		}
 		return $tjg_agents;
 	}
 
