@@ -399,4 +399,17 @@ class TJG_Agent
 		}
 		return $supervised_agents;
 	}
+
+	public static function create_agent_element(object $agent_to_create = null) {
+		if (is_null($agent_to_create)) { return false ; } else {
+			$agent_element = '<div class="agent-element">';
+			$agent_element .= '<div class="agent-name">' . $agent_to_create->agent_name . ' - ' . $agent_to_create->agent_number . '</div>';
+			$agent_element .= '<div class="agent-position">' . $agent_to_create->agent_position . '</div>';
+			$agent_element .= '<div class="agent-email">' . $agent_to_create->agent_email . '</div>';
+			$agent_element .= '<div class="agent-phone">' . $agent_to_create->agent_phone . '</div>';
+			$agent_element .= '<div class="agent-supervisor">' . $agent_to_create->agent_supervisor . '</div>';
+			$agent_element .= '</div>';
+		}
+		return $agent_element;
+	}
 }

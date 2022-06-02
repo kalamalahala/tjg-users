@@ -20,29 +20,32 @@ get_header();
 	
 	$agent_list = Tjg_Users::get_tjg_agents( $agent_number_search );
 
-	// recursively count the $agent_list array
-	$agent_count = count( $agent_list, COUNT_RECURSIVE );
-	$ticker = 0;
-	foreach ($agent_list as $agent) {
-		$ticker++;
-		print "<p>#$ticker) Agent Name: {$agent->agent_name}</p>";
-		print "<p>Agent Number: {$agent->agent_number}</p>";
-		if (!empty($agent->team) && is_array($agent->team)) {
-			foreach ($agent->team as $child) {
-				$ticker++;
-				print_r ($child);
-				// print "<p>#$ticker) {$agent->agent_name}'s Team</p>";
-				// print "<p>Agent Name: {$child->agent_name}</p>";
-				// print "<p>Agent Number: {$child->agent_number}</p>";
-			}
-		} else {
-			continue;
-		}
-		// print "<p>Team: {$agent->team}</p>";
-		print '<hr>';
+	foreach ($agent_list as $agent_object) {
+		$output = $agent_object->create_agent_element();
+		echo $output;
 	}
 
-	print "$ticker agents found";
+	// $ticker = 0;
+	// foreach ($agent_list as $agent) {
+	// 	$ticker++;
+	// 	print "<p>#$ticker) Agent Name: {$agent->agent_name}</p>";
+	// 	print "<p>Agent Number: {$agent->agent_number}</p>";
+	// 	if (!empty($agent->team) && is_array($agent->team)) {
+	// 		print "<p>#$ticker) {$agent->agent_name}'s Team</p>";
+	// 		foreach ($agent->team as $child) {
+	// 			$ticker++;
+	// 			print_r ($child);
+	// 			// print "<p>Agent Name: {$child->agent_name}</p>";
+	// 			// print "<p>Agent Number: {$child->agent_number}</p>";
+	// 		}
+	// 	} else {
+	// 		continue;
+	// 	}
+	// 	// print "<p>Team: {$agent->team}</p>";
+	// 	print '<hr>';
+	// }
+
+	// print "$ticker agents found";
 
 	?>
 	</pre>
