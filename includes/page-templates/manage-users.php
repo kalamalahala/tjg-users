@@ -22,7 +22,15 @@ get_header();
 
 	// recursively count the $agent_list array
 	$agent_count = count( $agent_list, COUNT_RECURSIVE );
-	print "Agent count: $agent_count\n";
+	$ticker = 0;
+	foreach ($agent_list as $agent) {
+		$ticker++;
+		print "<p>#$ticker) Agent Name: {$agent->agent_name}</p>";
+		print "<p>Agent Number: {$agent->agent_number}</p>";
+		print '<hr>';
+	}
+
+	print "$ticker agents found";
 
 	?>
 	</pre>
