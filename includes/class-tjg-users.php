@@ -300,15 +300,10 @@ class Tjg_Users {
 		// Get the agent's children
 		$children = self::get_supervised_agents( $hierarchy_agent );
 
-		var_dump($children);
-		die;
-		// if ( ! empty( $children ) ) {
-		// 	foreach ( $children as $child ) {
-		// 		$tjg_agents = array_merge( $tjg_agents, self::get_tjg_agents( $child ) );
-		// 	}
-		// }
+		$tjg_agents[0]['Supervised Agents'] = $children;
 
-		$tjg_agents = array_merge( $tjg_agents, $children );
+
+		// $tjg_agents = array_merge( $tjg_agents, $children );
 		return $tjg_agents;
 	}
 
