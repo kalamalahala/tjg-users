@@ -279,7 +279,7 @@ class Tjg_Users {
 		$tjg_agents = [];
 		// If a hierachy agent is provided, begin the search tree with that agent.
 		if ( $hierarchy_agent ) {
-			$tjg_agents[] = $hierarchy_agent;
+			$tjg_agents['agent'] = $hierarchy_agent;
 		} else {
 			// If no hierarchy agent is provided, begin the search tree with the Agency Owner
 			$meta_query = [
@@ -295,12 +295,12 @@ class Tjg_Users {
 			// Retrieve agent_number for that user
 			$hierarchy_agent = self::get_agent_number_by_user_id( $meta_agent[0]->ID );
 			
-			$tjg_agents[] = $hierarchy_agent;
+			$tjg_agents['agent'] = $hierarchy_agent;
 		}
 		// Get the agent's children
 		$children = self::get_supervised_agents( $hierarchy_agent );
 
-		$tjg_agents[0]['Supervised Agents'] = $children;
+		$tjg_agents['agent']['Supervised Agents'] = $children;
 
 
 		// $tjg_agents = array_merge( $tjg_agents, $children );
