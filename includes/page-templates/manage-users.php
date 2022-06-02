@@ -18,10 +18,8 @@ get_header();
 
 	$agent_list = Tjg_Users::get_tjg_agents();
 
-	foreach ($agent_list as $agent) {
-		echo 'yeet';
-	}
-	
+	print_r($agent_list);
+
 	?>
 	</pre>
 </div>
