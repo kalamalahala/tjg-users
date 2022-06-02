@@ -309,15 +309,11 @@ class Tjg_Users
 		$tjg_agents['agent'] = $agent;
 		$hierarchy = $agent->team();
 		if (!empty($hierarchy)) {
-			$tjg_agents['agent']['team'] = $hierarchy;
+			// Add the properties of each TJG_Agent object to the $tjg_agents array as 'team'
+			foreach ($hierarchy as $agent) {
+				$tjg_agents['team'][] = $agent;
+			}
 		}
-		
-		// If hierarchy isn't empty, create a new Agent object for each agent in the hierarchy using that agent's agent_number
-		// if (!empty($hierarchy)) {
-		// 	foreach ($hierarchy as $agent) {
-		// 		$tjg_agents['children'] = self::get_tjg_agents($agent->agent_number);
-		// 	}
-		// }
 		
 		return $tjg_agents;
 	}
