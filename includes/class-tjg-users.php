@@ -374,7 +374,7 @@ class TJG_Agent
 		$children = $children_query->get_results();
 		foreach ($children as $child) {
 			$agent_number = get_user_meta($child->ID, 'agent_number', true);
-			$supervised_agents[] = $agent_number;
+			$supervised_agents[] = new TJG_Agent($agent_number);
 		}
 		return $supervised_agents;
 	}
