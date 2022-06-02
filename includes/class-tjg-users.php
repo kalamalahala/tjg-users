@@ -295,16 +295,17 @@ class Tjg_Users {
 			// Retrieve agent_number for that user
 			$hierarchy_agent = self::get_agent_number_by_user_id( $meta_agent[0]->ID );
 			
-			$tjg_agents[] = $meta_agent[0]->ID;
+			$tjg_agents[] = $hierarchy_agent;
 		}
 		// Get the agent's children
 		$children = self::get_tjg_agent_children( $hierarchy_agent );
-		// If there are children, recursively call this function to get their children
-		// if ( $children ) {
-		// 	foreach ( $children as $child ) {
-		// 		$tjg_agents = array_merge( $tjg_agents, self::get_tjg_agents( $child ) );
-		// 	}
-		// }
+
+		if ( ! empty( $children ) ) {
+			foreach ( $children as $child ) {
+				$tjg_agents = array_merge( $tjg_agents, self::get_tjg_agents( $child ) );
+			}
+		}
+
 		$tjg_agents = array_merge( $tjg_agents, $children );
 		return $tjg_agents;
 	}
