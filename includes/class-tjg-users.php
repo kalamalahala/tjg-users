@@ -343,6 +343,16 @@ class Tjg_Users
 		$team = $agent_object->team();
 		return $team;
 	}
+
+	public static function get_all_by_position( string $position_search = null ) {
+		if (is_null($position_search)) { return false ; }
+		$query = new WP_User_Query(array(
+			'meta_key' => 'agent_position',
+			'meta_value' => $position_search,
+		));
+		$users = $query->get_results();
+		return $users;
+	}
 }
 
 

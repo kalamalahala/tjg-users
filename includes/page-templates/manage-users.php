@@ -20,10 +20,19 @@ get_header();
 	
 	$agent_list = Tjg_Users::get_tjg_agents( $agent_number_search );
 
-	foreach ($agent_list as $agent_object) {
-		$output = $agent_object->create_agent_element();
-		echo $output;
+	$junior_agents = Tjg_Users::get_all_by_position( 'Junior Partner' );
+	foreach ( $junior_agents as $agent ) {
+		echo '<p>' . $agent->first_name . ' ' . $agent->last_name . '</p>';
+		echo '<p>' . $agent->email . '</p>';
+		echo '<p>' . $agent->phone . '</p>';
+		echo '<p>' . $agent->agent_position . '</p>';
 	}
+
+
+	// foreach ($agent_list as $agent_object) {
+	// 	$output = $agent_object->create_agent_element();
+	// 	echo $output;
+	// }
 
 	// $ticker = 0;
 	// foreach ($agent_list as $agent) {
