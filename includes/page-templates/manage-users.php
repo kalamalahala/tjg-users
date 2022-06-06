@@ -22,10 +22,7 @@ get_header();
 
 	$junior_agents = Tjg_Users::get_all_by_position( 'Junior Partner' );
 	foreach ( $junior_agents as $agent ) {
-		echo '<p>' . $agent->first_name . ' ' . $agent->last_name . '</p>';
-		echo '<p>' . $agent->email . '</p>';
-		echo '<p>' . $agent->phone . '</p>';
-		echo '<p>' . $agent->agent_position . '</p>';
+		echo '<p>' . $agent->first_name . ' ' . $agent->last_name . ': ' . $agent->agent_number . '</p>';
 	}
 
 
