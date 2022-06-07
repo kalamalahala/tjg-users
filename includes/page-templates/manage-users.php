@@ -14,16 +14,32 @@ get_header();
 </header>
 <div class="users-container">
 	<pre>
+		This box will contain the starting agent defined either with $_get agent_id, or leaving it blank to begin with the Agency Owner.
+</pre>
+	<div class="agent-container">
+		<div class="profile-pic">
+			img
+		</div>
+		<div class="agent-info">
+			<h2>Agent Name</h2>
+			<p>Agent Description</p>
+		</div>
+		<div class="action-buttons">
+			<a href="#" class="action-edit-button">Edit</a>
+			<a href="#" class="action-delete-button">Delete</a>
+		</div>
+	</div>
 	<?php
 
-	$agent_number_search = $_GET['agent_id'] ?? null;
 	
-	$agent_list = Tjg_Users::get_tjg_agents( $agent_number_search );
+	// $agent_number_search = $_GET['agent_id'] ?? null;
+	
+	// $agent_list = Tjg_Users::get_tjg_agents( $agent_number_search );
 
-	$junior_agents = Tjg_Users::get_all_by_position( 'Junior Partner' );
-	foreach ( $junior_agents as $agent ) {
-		echo '<p>' . $agent->first_name . ' ' . $agent->last_name . ': ' . $agent->agent_number . '</p>';
-	}
+	// $junior_agents = Tjg_Users::get_all_by_position( 'Junior Partner' );
+	// foreach ( $junior_agents as $agent ) {
+	// 	echo '<p>' . $agent->first_name . ' ' . $agent->last_name . ': ' . $agent->agent_number . '</p>';
+	// }
 
 
 	// foreach ($agent_list as $agent_object) {
@@ -54,7 +70,7 @@ get_header();
 	// print "$ticker agents found";
 
 	?>
-	</pre>
+	this html should display in the large container but not in the individual agent boxes
 </div>
 
 
