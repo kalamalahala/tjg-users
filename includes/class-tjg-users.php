@@ -422,4 +422,8 @@ class TJG_Agent
 		}
 		return $agent_element;
 	}
+
+	public static function get_pending_activations() {
+		return null;
+	}
 }
